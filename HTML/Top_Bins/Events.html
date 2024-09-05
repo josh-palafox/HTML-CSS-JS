@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="../../CSS/Styles.css">
+</head>
+<body>
+  <nav :class="navbarColor">
+      <a class="websiteTitle" href="../index.html">{{websiteTitle}}</a>
+      <form class="rebbeca">
+        <button @click.prevent="rebeccaNavBar = !rebeccaNavBar">Rebecca</button>
+      </form>
+      <ul class="topBins">
+        <li v-for="(bins,index) in topBins" :key="index"><a :href="bins.link">{{ bins.text }}</a></li>
+      </ul>
+  </nav>
+
+  <alt-page
+    :section="topBins[0].text"
+    :main="mainText"
+  ></alt-page>
+
+  <script>
+    let app=Vue.createApp({
+      computed: {
+        navbarColor(){
+            return{
+              'darknavbar': !this.rebeccaNavBar,
+              'lightnavbar': this.rebeccaNavBar
+            }
+        }
+      },
+      data(){
+            return{
+                websiteTitle: 'The Baiting Beans',
+                topBins: [
+                  {text:'Events', link: "../Top_Bins/Events.html"},
+                  {text:'Browse Channels', link: "../Top_Bins/Browse_Channels.html"},
+                  {text:'Members', link: "../Top_Bins/Members.html"},
+                  {text:'About Me', link: "../Top_Bins/About_Me.html"}
+                ],
+                mainText: 'There are no upcoming events!',
+                rebeccaNavBar: false,
+            
+            };
+        }
+    });
+    
+    app.component('altPage', {
+        props:['section', 'main'],
+        template:`
+              <div>
+                <li class="sections">{{section}}</li>
+                <p class="mainText">{{main}}</p>
+              </div>
+        `
+    })
+    
+    .mount('body')
+
+    </script>
+</body>
+</html>

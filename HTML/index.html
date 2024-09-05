@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baitstone</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="../CSS/Styles.css">
+  </head>
+  <body>
+    <nav-bar
+  :website-title="websiteTitle"
+  :rebecca-nav-bar="rebeccaNavBar"
+  :nav-link-click="(index)=>rebeccaNavBar = !rebeccaNavBar"
+  :top-bins="topBins"
+  ></nav-bar>
+
+  <home-page
+  :main-text="mainText"
+  :main-topic="mainTopic"
+  :active-topic="activeTopic"
+  :topic-link-click="(index)=>activeTopic = index"
+  :subtext="subtext"
+  ></home-page>
+
+    <script>
+      let app=Vue.createApp({
+          data(){
+              return{
+                  websiteTitle: 'The Baiting Beans',
+                  topBins: [
+                    {text:'Events', link: "Top_Bins/Events.html"},
+                    {text:'Browse Channels', link: "Top_Bins/Browse_Channels.html"},
+                    {text:'Members', link: "Top_Bins/Members.html"},
+                    {text:'About Me', link: "Top_Bins/About_Me.html"}
+                  ],
+                  mainText: 'Welcome to the Baiting Beans',
+                  activeTopic: 0,
+                  mainTopic: [
+                    {sections:'Invite', subtext: "Invite your friends.",},
+                    {sections:'Personalize', subtext: "Personalize your profile."},
+                    {sections:'Messages', subtext: "Send direct messages through chat."},
+                    {sections:'Bots', subtext: "Gain access to various bots."}
+                  ],
+                  rebeccaNavBar: false,
+              };
+          }
+      });
+      
+      app.component('navBar', {
+        props:['websiteTitle', 'rebeccaNavBar', 'navLinkClick', 'topBins'],
+        template:`
+              <nav :class="{'navbar-dark': !rebeccaNavBar, 'navbar-light': rebeccaNavBar}">
+                <a class="websiteTitle" href="index.html">{{websiteTitle}}</a>
+                <form class="rebbeca">
+                  <button @click.prevent="navLinkClick(index)">Rebecca</button>
+                </form>
+                <ul class="topBins">
+                  <li v-for="(bins,index) in topBins" :key="index"><a :href="bins.link">{{ bins.text }}</a></li>
+                </ul>
+              </nav>
+
+           `
+      })
+
+      app.component('homePage', {
+        props:['mainText', 'mainTopic', 'activeTopic', 'topicLinkClick', 'subtext'],
+        template:`
+              <div>
+                <h2 class="mainText">{{ mainText }}</h2>
+                <li class="sections" v-for="(topic, index) in mainTopic" :key="index">
+                  <a
+                    :class="{active: activeTopic == index}" 
+                    href="index.html"
+                    @click.prevent="topicLinkClick(index)">{{topic.sections}}
+                  </a>
+                </li>
+                <p class="subtext">{{mainTopic[activeTopic].subtext}}</p>
+              </div>
+           `
+      })
+
+      .mount('body')
+
+    </script>
+  </body>
+</html>

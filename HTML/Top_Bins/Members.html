@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Members</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="../../CSS/Styles.css">
+</head>
+<body>
+    <div class='altPage'>
+        <nav class="navbar">
+          <a class="websiteTitle" href="../index.html">{{websiteTitle}}</a>
+          <ul class="topBins">
+            <li v-for="(bins,index) in topBins" :key="index"><a :href="bins.link">{{ bins.text }}</a></li>
+          </ul>
+        </nav>
+  
+  
+        <li class="sections">{{topBins[2].text}}</li>
+  
+        <div>
+          <li class="sections" v-for="(member, index) in members" :key="index">
+            <a
+              :class="{active: activeMember == index}" 
+              href="Members.html"
+              @click.prevent="activeMember = index">{{member.name}}
+            </a>
+          </li>
+        </div>
+
+        <div>
+            <ul class="sections" v-for="personalInfo in information[activeMember]">
+              <li v-for="info in personalInfo">
+                  <p>{{info}}</p>
+              </li>
+            </ul>
+          </div>
+  
+    </div>
+    <script>
+        Vue.createApp({
+            data(){
+                return{
+                    websiteTitle: 'The Baiting Beans',
+                    topBins: [
+                    {text:'Events', link: "../Top_Bins/Events.html"},
+                      {text:'Browse Channels', link: "../Top_Bins/Browse_Channels.html"},
+                      {text:'Members', link: "../Top_Bins/Members.html"},
+                      {text:'About Me', link: "../Top_Bins/About_Me.html"}
+                    ],
+                    activeMember: 0,
+                    members: [
+                      {name:'oak6232'},
+                      {name:'khlor'},
+                      {name:'Baitstone'},
+                    ],
+                    information: [
+                      {info: ['Pronouns: None', 'Member Since: 06/27/24']},
+                      {info: ['Pronouns: she/ass', 'Member Since: 06/26/24']},
+                      {info: ["Pronouns: I'm/Him", 'Member Since: 06/26/24']},
+                    ],
+                };
+            }
+        }).mount('.altPage')
+  
+    </script>
+
+</body>
+</html>

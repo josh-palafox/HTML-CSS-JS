@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="../../CSS/Styles.css">
+  </head>
+  <body>
+    <div class='altPage'>
+      <nav :class="navbarColor">
+        <a class="websiteTitle" href="../index.html">{{websiteTitle}}</a>
+        <form class="rebbeca">
+          <button @click.prevent="rebeccaNavBar = !rebeccaNavBar">Rebecca</button>
+        </form>
+        <ul class="topBins">
+          <li v-for="(bins,index) in topBins" :key="index"><a :href="bins.link">{{ bins.text }}</a></li>
+        </ul>
+      </nav>
+
+      <div>
+        <li class="sections">{{topBins[3].text}}</li>
+        <img src="../Images/Josh_Palafox.JPG" alt="An image of Josh Palafox">
+        <p class="mainText">{{mainText}}</p>
+        <p class="subtext">{{subtext}}</p>
+      </div>
+
+    </div>
+    <script>
+      Vue.createApp({
+            computed: {
+              navbarColor(){
+                return{
+                  'darknavbar': !this.rebeccaNavBar,
+                  'lightnavbar': this.rebeccaNavBar
+                }
+              }
+           },
+          data(){
+              return{
+                  websiteTitle: 'The Baiting Beans',
+                  topBins: [
+                  {text:'Events', link: "../Top_Bins/Events.html"},
+                      {text:'Browse Channels', link: "../Top_Bins/Browse_Channels.html"},
+                      {text:'Members', link: "../Top_Bins/Members.html"},
+                      {text:'About Me', link: "../Top_Bins/About_Me.html"}
+                  ],
+                  mainText: 'Joshua Charles "Baitstone" S. Palafox',
+                  subtext: 'fanum taxskibidi rizzlerkai cenatrizzleramogussigma malegrimace w rizzfortnite sigma malel rizzskibidiskibidi rizzleramogussigma malegrimace?(English or Spanish?)',
+                  rebeccaNavBar: false,
+              };
+          }
+      }).mount('.altPage')
+
+    </script>
+
+  </body>
+</html>

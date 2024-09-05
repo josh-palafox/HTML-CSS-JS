@@ -1,0 +1,119 @@
+body{
+    background-color: #2e2f39;
+    margin: 0;
+    padding: 0;
+}
+
+*{
+    color: white;
+}
+
+.mainText, .sections, .subtext{
+    padding: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 0;
+}
+
+.topBins, .sections, .mainText{
+    font-size: x-large;
+}
+
+.websiteTitle{
+    font-size: xx-large;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    text-decoration: none;
+}
+
+.navbar{
+
+}
+
+.navbar-dark{
+    background-color: #252525;
+    padding: 20px;
+}
+
+.navbar-light{
+    background-color: rebeccapurple;
+    padding: 20px;
+}
+
+.topBins{
+    li {
+        a{
+            text-decoration: none;
+            padding-left: 50px;
+            padding-right: 50px;
+        }
+        display: inline;
+    }
+}
+
+.sections, .altPage{
+    li {
+        list-style: circle;
+        font-weight: normal;
+    }
+}
+
+.mainText, .altPage{
+    h2 {
+        font-weight: bold;
+    }
+}
+
+.sections{
+    font-size: x-large;
+}
+
+.altPage{
+
+}
+
+.subtext{
+    font-size: large;
+    text-align: right;
+}
+
+.active{
+    color: #5662f6;
+
+}
+.category{
+    li {
+        a{
+            text-decoration: none;
+            padding-left: 50px;
+            padding-right: 50px;
+        }
+        display: inline;
+    }
+
+}
+
+.channels{
+    list-style: circle;
+}
+
+img {
+        width: 200px;
+        height: 200px;
+        border-radius: 100px;
+        object-fit: cover;
+        float: left;
+        margin-right: 25px;
+      }
+
+button{
+    color: whitesmoke;
+    background-color:rebeccapurple;
+    border-radius: 50px;
+    border-color: #252525;
+    width: 150px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 24px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    margin-left: 1100px;
+}

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Channels</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="../../CSS/Styles.css">
+</head>
+<body>
+  <nav-bar
+  :website-title="websiteTitle"
+  :color="color"
+  :nav-link-click="(index)=>navbarColor()"
+  :top-bins="topBins"
+  ></nav-bar>
+
+  <li class="sections">{{topBins[1].text}}</li>
+
+  <browse-channels
+    :categories="categories"
+    :active-category="activeCategory"
+    :category-link-click="(index)=>activeCategory=index"
+  ></browse-channels>
+
+    <div>
+      <ul class="channels" v-for="channel in channels[activeCategory]">
+        <li v-for="text in channel">
+            <p>{{text}}</p>
+        </li>
+      </ul>
+    </div>
+      <script>
+        let app=Vue.createApp({
+            data(){
+                return{
+                    websiteTitle: 'The Baiting Beans',
+                    topBins: [
+                      {text:'Events', link: "../Top_Bins/Events.html"},
+                      {text:'Browse Channels', link: "../Top_Bins/Browse_Channels.html"},
+                      {text:'Members', link: "../Top_Bins/Members.html"},
+                      {text:'About Me', link: "../Top_Bins/About_Me.html"}
+                    ],
+                    activeCategory: 0,
+                    categories: [
+                        {title:'Uncategorized'},
+                        {title:'The Written Word'},
+                        {title:'The Spoken Word'}
+                    ],
+                    channels: [
+                        {text: ['rules','moderators only']},
+                        {text: ['general','the-transcript', 'the-maidenless']},
+                        {text: ['Valorant','Destiny', 'genshin', 'Overwatch', 'Other Games']}
+                    ],
+                    
+                };
+            },
+        });
+        
+        app.component('browseChannels', {
+        props:['categories', 'activeCategory', 'categoryLinkClick'],
+        template:`
+              <div>
+                <ul class="category">
+                  <li v-for="(category,index) in categories" :key="index">
+                        <a
+                            :class="{active: activeCategory == index}"
+                            href="Browse_Channels.html"
+                            @click.prevent="categoryLinkClick(index)">{{ category.title }}
+                        </a>
+                    </li>
+                </ul>
+              </div>
+           `
+         })
+
+         app.component('navBar', {
+        props:['websiteTitle', 'color', 'navLinkClick', 'topBins'],
+        template:`
+              <nav :class="[\`navbar-\${color}\`]">
+                <a class="websiteTitle" href="../index.html">{{websiteTitle}}</a>
+                <form class="rebbeca">
+                  <button @click.prevent="navLinkClick(index)">Rebecca</button>
+                </form>
+                <ul class="topBins">
+                  <li v-for="(bins,index) in topBins" :key="index"><a :href="bins.link">{{ bins.text }}</a></li>
+                </ul>
+              </nav>
+           `,
+           methods: {
+                navbarColor(){
+                    let color = 'dark';
+
+                    if(this.color == 'dark'){
+                        color = 'light'
+
+                    }
+
+                    this.color = color;
+                }
+            },
+            data(){
+              return{
+                  color: 'dark'
+              }
+            }
+         })
+        
+        .mount('body')
+  
+      </script>
+</body>
+</html>
